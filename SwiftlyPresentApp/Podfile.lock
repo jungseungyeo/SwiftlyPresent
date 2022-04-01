@@ -1,0 +1,23 @@
+PODS:
+  - CombineCocoa (0.4.0)
+  - SwiftlyPresent (0.1.3)
+
+DEPENDENCIES:
+  - CombineCocoa
+  - SwiftlyPresent (from `./`)
+
+SPEC REPOS:
+  trunk:
+    - CombineCocoa
+
+EXTERNAL SOURCES:
+  SwiftlyPresent:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  CombineCocoa: 68a050228ce7c53c1c5ac2c57cccf92a7f5c5085
+  SwiftlyPresent: bbbd72c8bfc1dbb36295d346442ed68dd8c14877
+
+PODFILE CHECKSUM: 1d9f83804426eab319534dfc1a2d717261293a20
+
+COCOAPODS: 1.11.2
