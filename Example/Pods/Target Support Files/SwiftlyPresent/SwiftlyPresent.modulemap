@@ -1,0 +1,6 @@
+framework module SwiftlyPresent {
+  umbrella header "SwiftlyPresent-umbrella.h"
+
+  export *
+  module * { export * }
+}
