@@ -1,6 +1,0 @@
-framework module Pods_SwiftlyPresent_Example {
-  umbrella header "Pods-SwiftlyPresent_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
