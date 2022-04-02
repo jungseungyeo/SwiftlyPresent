@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftlyPresent'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'A short description of SwiftlyPresent.'
   s.description      = <<-DESC
 TODO: Add long description of the pod here.
@@ -21,4 +21,5 @@ TODO: Add long description of the pod here.
   s.source_files = 'SwiftlyPresent/Classes/**/*'
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.swift_version = "5.0"
 end

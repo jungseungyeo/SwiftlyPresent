@@ -60,14 +60,14 @@ class SignUpEmailViewController: RootViewController, SwiftlyPresentable {
             }
             .sink { [weak self] promiseData in
                 guard let self = self else { return }
-                self.presetnSujbect?.send(promiseData ?? "")
+                self.presentSubject?.send(promiseData ?? "")
             }.store(in: &cancellables)
     }
     
     @objc
     private func actionToClose() {
         self.dismiss(animated: true) { [weak self] in
-            self?.presetnSujbect?.send(completion: .failure(NSError(domain: "close", code: -999, userInfo: nil)))
+            self?.presentSubject?.send(completion: .failure(NSError(domain: "close", code: -999, userInfo: nil)))
         }
     }
     

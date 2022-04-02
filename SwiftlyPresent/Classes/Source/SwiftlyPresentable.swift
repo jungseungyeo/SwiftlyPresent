@@ -14,7 +14,7 @@ public protocol SwiftlyPresentable where Self: UIViewController {
 }
 
 extension SwiftlyPresentable {
-    public private(set) var presetnSujbect: PassthroughSubject<SwiftlyData, Error>? {
+    public private(set) var presentSubject: PassthroughSubject<SwiftlyData, Error>? {
         set { objc_setAssociatedObject(self, &complieteSubjectAssociatedObjectKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
         get { return objc_getAssociatedObject(self, &complieteSubjectAssociatedObjectKey) as? PassthroughSubject<SwiftlyData, Error> }
     }
@@ -25,12 +25,12 @@ extension SwiftlyPresentable {
         completion: (() -> Void)? = nil
     ) -> AnyPublisher<SwiftlyData, Error> {
         
-        if presetnSujbect == nil {
-            presetnSujbect = .init()
+        if presentSubject == nil {
+            presentSubject = .init()
         }
         
         on.present(self, animated: flag, completion: completion)
-        return presetnSujbect?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        return presentSubject?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
     }
     
     public func presentedWithNavigation(
@@ -39,34 +39,34 @@ extension SwiftlyPresentable {
         completion: (() -> Void)? = nil
     ) -> AnyPublisher<SwiftlyData, Error> {
         
-        if presetnSujbect == nil {
-            presetnSujbect = .init()
+        if presentSubject == nil {
+            presentSubject = .init()
         }
         
         let navigationController = UINavigationController(rootViewController: self)
         navigationController.modalPresentationStyle = .fullScreen
         on.present(navigationController, animated: flag, completion: completion)
         
-        return presetnSujbect?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        return presentSubject?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
     }
     
     public func dismiss(animated flag: Bool, promiseData: SwiftlyData) {
         dismiss(animated: flag) { [weak self] in
-            self?.presetnSujbect?.send(promiseData)
-            self?.presetnSujbect?.send(completion: .finished)
-            self?.presetnSujbect = nil
+            self?.presentSubject?.send(promiseData)
+            self?.presentSubject?.send(completion: .finished)
+            self?.presentSubject = nil
         }
     }
     
     public func pushViewController(animated: Bool) -> AnyPublisher<SwiftlyData, Error> {
         
-        if presetnSujbect == nil {
-            presetnSujbect = .init()
+        if presentSubject == nil {
+            presentSubject = .init()
         }
         
         UIApplication.shared.windows.first?.topViewController()?.navigationController?.pushViewController(self, animated: true)
         
-        return presetnSujbect?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        return presentSubject?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
     }
     
     public func popViewController(
@@ -75,12 +75,12 @@ extension SwiftlyPresentable {
     ) -> AnyPublisher<SwiftlyData, Error> {
         
         UIApplication.shared.windows.first?.topViewController()?.navigationController?.popViewController(animated: animated) { [weak self] in
-            self?.presetnSujbect?.send(promiseData)
-            self?.presetnSujbect?.send(completion: .finished)
-            self?.presetnSujbect = nil
+            self?.presentSubject?.send(promiseData)
+            self?.presentSubject?.send(completion: .finished)
+            self?.presentSubject = nil
         }
         
-        return presetnSujbect?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        return presentSubject?.eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
     }
 }
 

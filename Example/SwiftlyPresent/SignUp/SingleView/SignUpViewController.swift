@@ -63,7 +63,7 @@ class SignUpViewController: RootViewController, SwiftlyPresentable {
     @objc
     private func actionToClose() {
         self.dismiss(animated: true) { [weak self] in
-            self?.presetnSujbect?.send(completion: .failure(NSError(domain: "close", code: -999, userInfo: nil)))
+            self?.presentSubject?.send(completion: .failure(NSError(domain: "close", code: -999, userInfo: nil)))
         }
     }
     
