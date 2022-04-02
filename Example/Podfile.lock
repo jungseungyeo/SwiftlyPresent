@@ -1,6 +1,6 @@
 PODS:
   - CombineCocoa (0.4.0)
-  - SwiftlyPresent (0.1.0)
+  - SwiftlyPresent (0.1.4)
 
 DEPENDENCIES:
   - CombineCocoa
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CombineCocoa: 68a050228ce7c53c1c5ac2c57cccf92a7f5c5085
-  SwiftlyPresent: 59034318f447e5bbcb07b36d8a6dff1b93189cfa
+  SwiftlyPresent: 0043c1bfe11a08c32f57cb287a2e8b79760e7f9a
 
-PODFILE CHECKSUM: c8acb2cff8fdb3e592b3218e97dfcc662ed50e76
+PODFILE CHECKSUM: 498172f145f2e8a0addff523351fc3ad25a82631
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
