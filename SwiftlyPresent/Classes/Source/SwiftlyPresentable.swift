@@ -9,21 +9,21 @@ import UIKit
 import Combine
 
 private var complieteSubjectAssociatedObjectKey: Void?
-public protocol SwiftlyPresentable where Self: UIViewController {
+public protocol SwiftlyPresentable {
     associatedtype SwiftlyData
 }
 
-extension SwiftlyPresentable {
-    public private(set) var presentSubject: PassthroughSubject<SwiftlyData, Error>? {
+extension SwiftlyPresentable where Self: UIViewController {
+    public private(set) var presentSubject: PassthroughSubject<SwiftlyData, Never>? {
         set { objc_setAssociatedObject(self, &complieteSubjectAssociatedObjectKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
-        get { return objc_getAssociatedObject(self, &complieteSubjectAssociatedObjectKey) as? PassthroughSubject<SwiftlyData, Error> }
+        get { return objc_getAssociatedObject(self, &complieteSubjectAssociatedObjectKey) as? PassthroughSubject<SwiftlyData, Never> }
     }
     
     public func presented(
         on: UIViewController,
         animated flag: Bool = true,
         completion: (() -> Void)? = nil
-    ) -> AnyPublisher<SwiftlyData, Error> {
+    ) -> AnyPublisher<SwiftlyData, Never> {
         
         if presentSubject == nil {
             presentSubject = .init()
@@ -37,7 +37,7 @@ extension SwiftlyPresentable {
         on: UIViewController,
         animated flag: Bool = true,
         completion: (() -> Void)? = nil
-    ) -> AnyPublisher<SwiftlyData, Error> {
+    ) -> AnyPublisher<SwiftlyData, Never> {
         
         if presentSubject == nil {
             presentSubject = .init()
@@ -58,7 +58,7 @@ extension SwiftlyPresentable {
         }
     }
     
-    public func pushViewController(animated: Bool) -> AnyPublisher<SwiftlyData, Error> {
+    public func pushViewController(animated: Bool) -> AnyPublisher<SwiftlyData, Never> {
         
         if presentSubject == nil {
             presentSubject = .init()
@@ -72,7 +72,7 @@ extension SwiftlyPresentable {
     public func popViewController(
         animated: Bool,
         promiseData: SwiftlyData
-    ) -> AnyPublisher<SwiftlyData, Error> {
+    ) -> AnyPublisher<SwiftlyData, Never> {
         
         UIApplication.shared.windows.first?.topViewController()?.navigationController?.popViewController(animated: animated) { [weak self] in
             self?.presentSubject?.send(promiseData)
